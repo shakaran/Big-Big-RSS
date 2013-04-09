@@ -1,4 +1,6 @@
 <?php
+define('EXPECTED_CONFIG_VERSION', 26);
+
 if(file_exists('../conf/Config.php'))
 {
     require_once '../conf/Config.php';
@@ -7,7 +9,6 @@ else
 {
     require_once 'conf/Config.php';
 }
-
 
 	define('SCHEMA_VERSION', 116);
 
