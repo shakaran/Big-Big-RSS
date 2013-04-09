@@ -15,9 +15,10 @@ else
 	define('LABEL_BASE_INDEX', -1024);
 	define('PLUGIN_FEED_BASE_INDEX', -128);
 
-	$fetch_last_error      = FALSE;
-	$fetch_last_error_code = FALSE;
-	$pluginhost            = FALSE;
+	$fetch_last_error        = FALSE;
+	$fetch_last_error_code   = FALSE;
+	$fetch_last_content_type = FALSE;
+	$pluginhost              = FALSE;
 
 	function __autoload($class) 
 	{
@@ -349,6 +350,7 @@ else
 
 		global $fetch_last_error;
 		global $fetch_last_error_code;
+		global $fetch_last_content_type;
 
 		$url = str_replace(' ', '%20', $url);
 
@@ -399,11 +401,11 @@ else
 			}
 
 			$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			$content_type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+			$fetch_last_content_type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
 
 			$fetch_last_error_code = $http_code;
 
-			if ($http_code != 200 || $type && strpos($content_type, "$type") === false) {
+			if ($http_code != 200 || $type && strpos($fetch_last_content_type, "$type") === false) {
 				if (curl_errno($ch) != 0) {
 					$fetch_last_error = curl_errno($ch) . " " . curl_error($ch);
 				} else {
@@ -430,6 +432,15 @@ else
 			}
 
 			$data = @file_get_contents($url);
+
+			$fetch_last_content_type = false;  // reset if no type was sent from server
+			foreach ($http_response_header as $h) {
+				if (substr(strtolower($h), 0, 13) == 'content-type:') {
+					$fetch_last_content_type = substr($h, 14);
+					// don't abort here b/c there might be more than one
+					// e.g. if we were being redirected -- last one is the right one
+				}
+			}
 
 			if (!$data && function_exists('error_get_last')) {
 				$error = error_get_last();
