@@ -3,6 +3,7 @@
 		get_include_path());
 
 	require_once "config.php";
+	require_once 'conf/Config.php';
 
 	// backwards compatible wrapper for old-style image caching
 	/* if (isset($_GET['url'])) {

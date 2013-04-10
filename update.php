@@ -7,6 +7,8 @@
 
 	chdir(dirname(__FILE__));
 
+	require_once 'conf/Config.php';
+	
 	require_once "functions.php";
 	require_once "rssfuncs.php";
 	require_once "config.php";
@@ -150,8 +152,8 @@
 			$quiet = (isset($options["quiet"])) ? "--quiet" : "";
 
 			passthru(PHP_EXECUTABLE . " " . $argv[0] ." --daemon-loop $quiet");
-			_debug("Sleeping for " . DAEMON_SLEEP_INTERVAL . " seconds...");
-			sleep(DAEMON_SLEEP_INTERVAL);
+			_debug("Sleeping for " . Config::DAEMON_SLEEP_INTERVAL . " seconds...");
+			sleep(Config::DAEMON_SLEEP_INTERVAL);
 		}
 	}
 

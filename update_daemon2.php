@@ -9,6 +9,7 @@
 	define('DISABLE_SESSIONS', true);
 
 	require_once "version.php";
+	require_once 'conf/Config.php';
 
 	if (strpos(VERSION, ".99") !== false || getenv('DAEMON_XDEBUG')) {
 		define('DAEMON_EXTENDED_DEBUG', true);
@@ -20,12 +21,6 @@
 	require_once "config.php";
 	require_once "db.php";
 	require_once "db-prefs.php";
-
-	// defaults
-	define('PURGE_INTERVAL', 3600); // seconds
-	define('MAX_CHILD_RUNTIME', 600); // seconds
-	define('MAX_JOBS', 2);
-	define('SPAWN_INTERVAL', DAEMON_SLEEP_INTERVAL); // seconds
 
 	if (!function_exists('pcntl_fork')) {
 		die("error: This script requires PHP compiled with PCNTL module.\n");
@@ -71,7 +66,7 @@
 		foreach (array_keys($ctimes) as $pid) {
 			$started = $ctimes[$pid];
 
-			if (time() - $started > MAX_CHILD_RUNTIME) {
+			if (time() - $started > Config::MAX_CHILD_RUNTIME) {
 				_debug("[MASTER] child process $pid seems to be stuck, aborting...");
 				posix_kill($pid, SIGKILL);
 			}
@@ -131,9 +126,9 @@
 		print "Options:\n";
 		print "  --log FILE           - log messages to FILE\n";
 		print "  --tasks N            - amount of update tasks to spawn\n";
-		print "                         default: " . MAX_JOBS . "\n";
+		print "                         default: " . Config::MAX_JOBS . "\n";
 		print "  --interval N         - task spawn interval\n";
-		print "                         default: " . SPAWN_INTERVAL . " seconds.\n";
+		print "                         default: " . Config::DAEMON_SLEEP_INTERVAL . " seconds.\n";
 		print "  --quiet              - don't output messages to stdout\n";
 		return;
 	}
@@ -144,14 +139,14 @@
 		_debug("Set to spawn " . $options["tasks"] . " children.");
 		$max_jobs = $options["tasks"];
 	} else {
-		$max_jobs = MAX_JOBS;
+		$max_jobs = Config::MAX_JOBS;
 	}
 
 	if (isset($options["interval"])) {
 		_debug("Spawn interval: " . $options["interval"] . " seconds.");
 		$spawn_interval = $options["interval"];
 	} else {
-		$spawn_interval = SPAWN_INTERVAL;
+		$spawn_interval = Config::DAEMON_SLEEP_INTERVAL;
 	}
 
 	if (isset($options["log"])) {
