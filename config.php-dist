@@ -37,9 +37,6 @@
 	// *** Files and directories ***
 	// *****************************
 
-	define('PHP_EXECUTABLE', '/usr/bin/php');
-	// Path to PHP executable, used for various command-line tt-rss programs
-
 	define('LOCK_DIRECTORY', 'lock');
 	// Directory for lockfiles, must be writable to the user you run
 	// daemon process or cronjobs under.

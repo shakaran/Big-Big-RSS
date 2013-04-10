@@ -40,7 +40,6 @@
 					'SELF_URL_PATH',
 					'SINGLE_USER_MODE',
 					'SIMPLE_UPDATE_MODE',
-					'PHP_EXECUTABLE',
 					'LOCK_DIRECTORY',
 					'CACHE_DIR',
 					'ICONS_DIR',

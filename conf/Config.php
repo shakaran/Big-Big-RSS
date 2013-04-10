@@ -11,5 +11,9 @@ class Config
 	const MAX_CHILD_RUNTIME     = 600;  // seconds
 	const MAX_JOBS              = 2;
 	const DAEMON_SLEEP_INTERVAL = 60; // seconds
-
+	
+	// Files and directories
+	
+	// Path to PHP executable, used for various command-line programs
+	const PHP_EXECUTABLE        = '/usr/bin/php';
 }

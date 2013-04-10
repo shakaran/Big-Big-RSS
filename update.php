@@ -16,9 +16,6 @@
 	require_once "db.php";
 	require_once "db-prefs.php";
 
-	if (!defined('PHP_EXECUTABLE'))
-		define('PHP_EXECUTABLE', '/usr/bin/php');
-
 	// Create a database connection.
 	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -151,7 +148,7 @@
 		while (true) {
 			$quiet = (isset($options["quiet"])) ? "--quiet" : "";
 
-			passthru(PHP_EXECUTABLE . " " . $argv[0] ." --daemon-loop $quiet");
+			passthru(Config::PHP_EXECUTABLE . " " . $argv[0] ." --daemon-loop $quiet");
 			_debug("Sleeping for " . Config::DAEMON_SLEEP_INTERVAL . " seconds...");
 			sleep(Config::DAEMON_SLEEP_INTERVAL);
 		}
