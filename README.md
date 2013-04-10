@@ -14,7 +14,7 @@ This fork was mainly created for [this pull request](https://github.com/gothfox/
 Web-based news feed aggregator, designed to allow you to read news from 
 any location, while feeling as close to a real desktop application as possible.
 
-https://github.com/shakaran/Tiny-Tiny-RSS
+https://github.com/shakaran/Big-Big-RSS
 
 ## License
 
