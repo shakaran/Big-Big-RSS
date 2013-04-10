@@ -277,5 +277,3 @@ function hsl2rgb($arr) {
     }
     return array($r, $g, $B);
 }
-
-?>

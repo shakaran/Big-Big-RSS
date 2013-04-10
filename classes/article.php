@@ -340,7 +340,4 @@ class Article extends Handler_Protected {
 
 		print json_encode($reply);
 	}
-
-
-
 }

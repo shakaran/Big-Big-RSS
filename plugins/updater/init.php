@@ -383,4 +383,3 @@ class Updater extends Plugin {
 	}
 
 }
-?>

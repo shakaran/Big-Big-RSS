@@ -188,4 +188,3 @@ class Auth_Internal extends Plugin implements IAuthModule {
 		}
 	}
 }
-?>

@@ -180,5 +180,3 @@ function al2gt($gettextlangs, $mime) {
 
   return $curgtlang;
 }
-
-?>

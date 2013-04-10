@@ -635,4 +635,3 @@ class RPC extends Handler_Protected {
 	}
 
 }
-?>

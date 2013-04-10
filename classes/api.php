@@ -765,5 +765,3 @@ class API extends Handler {
 
 
 }
-
-?>

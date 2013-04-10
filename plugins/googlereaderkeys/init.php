@@ -34,4 +34,3 @@ class GoogleReaderKeys extends Plugin {
 
 	}
 }
-?>

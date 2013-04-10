@@ -71,4 +71,3 @@ class Share extends Plugin {
 
 
 }
-?>

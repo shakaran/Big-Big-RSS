@@ -71,4 +71,3 @@ class Note extends Plugin {
 	}
 
 }
-?>

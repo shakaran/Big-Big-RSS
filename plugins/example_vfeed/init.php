@@ -46,4 +46,3 @@ class Example_VFeed extends Plugin {
 		return $qfh_ret;
 	}
 }
-?>

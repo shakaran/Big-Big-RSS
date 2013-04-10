@@ -37,4 +37,3 @@ class Mark_Button extends Plugin {
 		return $marked_pic;
 	}
 }
-?>

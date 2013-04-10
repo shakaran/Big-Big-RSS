@@ -1365,6 +1365,3 @@
 		return preg_replace("/[ \"\',.:;]/", "-",
 			mb_strtolower(strip_tags($title), 'utf-8'));
 	}
-
-
-?>

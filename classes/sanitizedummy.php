@@ -4,4 +4,3 @@ class SanitizeDummy extends SimplePie_Sanitize {
 		return $data;
 	}
 }
-?>

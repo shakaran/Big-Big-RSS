@@ -90,4 +90,3 @@ class MailTo extends Plugin {
 	}
 
 }
-?>

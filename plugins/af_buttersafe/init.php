@@ -56,4 +56,3 @@ class Af_Buttersafe extends Plugin {
 		return $article;
 	}
 }
-?>

@@ -25,5 +25,3 @@
 	$cat_id = db_escape_string($link, $_REQUEST["id"]);
 
   	render_category($link, $cat_id);
-?>
-

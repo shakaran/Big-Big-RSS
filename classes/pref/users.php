@@ -462,4 +462,3 @@ class Pref_Users extends Handler_Protected {
 		}
 
 	}
-?>

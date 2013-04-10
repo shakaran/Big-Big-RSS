@@ -919,4 +919,3 @@ function programLogicError ($errorId) {
    die ("MiniTemplator: Program logic error $errorId.\n"); }
 
 }
-?>

@@ -59,5 +59,3 @@
 		print json_encode(array("error", "UNKNOWN_METHOD"));
 		break;
 	}
-?>
-

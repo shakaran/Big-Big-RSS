@@ -150,4 +150,3 @@
 
 	// We close the connection to database.
 	db_close($link);
-?>

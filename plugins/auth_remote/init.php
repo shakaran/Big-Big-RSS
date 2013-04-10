@@ -80,5 +80,3 @@ class Auth_Remote extends Plugin implements IAuthModule {
 		return false;
 	}
 }
-
-?>

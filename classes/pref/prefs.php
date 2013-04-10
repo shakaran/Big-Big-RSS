@@ -1131,4 +1131,3 @@ class Pref_Prefs extends Handler_Protected {
 		return "";
 	}
 }
-?>

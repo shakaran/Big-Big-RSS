@@ -34,5 +34,3 @@
 	}
 
 	db_close($link);
-
-?>

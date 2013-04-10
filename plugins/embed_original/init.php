@@ -53,4 +53,3 @@ class Embed_Original extends Plugin {
 	}
 
 }
-?>

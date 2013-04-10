@@ -195,5 +195,3 @@
 	}
 
 	initial_sanity_check($link);
-
-?>

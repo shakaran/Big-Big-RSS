@@ -27,4 +27,3 @@ class Close_Button extends Plugin {
 		return $rv;
 	}
 }
-?>

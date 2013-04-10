@@ -1152,4 +1152,3 @@ class Feeds extends Handler_Protected {
 
 
 }
-?>

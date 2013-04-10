@@ -51,4 +51,3 @@ class Example_Routing extends Plugin implements IHandler {
 	}
 
 }
-?>

@@ -102,4 +102,3 @@ class NSFW extends Plugin {
 	}
 
 }
-?>

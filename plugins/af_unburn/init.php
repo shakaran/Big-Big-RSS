@@ -129,4 +129,3 @@ class Af_Unburn extends Plugin {
 		return $url;
 	}
 }
-?>

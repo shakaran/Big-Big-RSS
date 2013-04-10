@@ -28,4 +28,3 @@ class Example_Article extends Plugin {
 		return $article;
 	}
 }
-?>

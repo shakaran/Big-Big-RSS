@@ -269,4 +269,3 @@ class Dlg extends Handler_Protected {
 
 
 }
-?>

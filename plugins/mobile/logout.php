@@ -12,4 +12,3 @@
 	logout_user();
 
 	header("Location: index.php");
-?>

@@ -47,4 +47,3 @@
 			print "ERRORS[$id] = \"$error\";\n";
 		}
 	}
-?>

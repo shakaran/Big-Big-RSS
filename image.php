@@ -48,5 +48,3 @@
 			echo "File not found.";
 		}
 	}
-
-?>

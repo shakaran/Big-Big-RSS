@@ -177,4 +177,3 @@ class Mail extends Plugin {
 
 
 }
-?>

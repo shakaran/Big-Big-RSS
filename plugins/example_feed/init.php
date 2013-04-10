@@ -26,4 +26,3 @@ class Example_Feed extends Plugin {
 		_debug("... here's my link element: " . $feed->get_link());
 	}
 }
-?>

@@ -86,4 +86,3 @@ class Af_PennyArcade extends Plugin {
 		return $article;
 	}
 }
-?>

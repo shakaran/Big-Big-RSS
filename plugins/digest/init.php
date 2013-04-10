@@ -107,4 +107,3 @@ class Digest extends Plugin implements IHandler {
 	}
 
 }
-?>

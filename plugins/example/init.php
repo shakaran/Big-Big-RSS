@@ -80,4 +80,3 @@ class Example extends Plugin {
 		print "</div>"; #pane
 	}
 }
-?>

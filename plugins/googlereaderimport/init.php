@@ -354,4 +354,3 @@ class GoogleReaderImport extends Plugin {
 		print "</div>"; #pane
 	}
 }
-?>

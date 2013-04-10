@@ -137,4 +137,3 @@ class Af_RedditImgur extends Plugin {
 		return $article;
 	}
 }
-?>

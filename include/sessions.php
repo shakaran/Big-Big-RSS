@@ -187,4 +187,3 @@
 			@session_start();
 		}
 	}
-?>

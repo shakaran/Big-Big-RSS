@@ -30,4 +30,3 @@
 	} else {
 		render_flat_feed_list($link, $offset);
 	}
-?>

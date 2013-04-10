@@ -56,4 +56,3 @@ class Af_GoComics extends Plugin {
 		return $article;
 	}
 }
-?>

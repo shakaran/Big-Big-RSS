@@ -42,4 +42,3 @@ class Mobile extends Plugin implements IHandler {
 
 
 }
-?>

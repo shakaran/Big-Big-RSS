@@ -1060,4 +1060,3 @@ class Pref_Filters extends Handler_Protected {
 		db_query($this->link, "COMMIT");
 	}
 }
-?>

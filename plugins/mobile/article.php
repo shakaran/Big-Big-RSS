@@ -28,5 +28,3 @@
 	$is_cat = db_escape_string($link, $_REQUEST["is_cat"]);
 
   	render_article($link, $id, $feed_id, $cat_id, $is_cat);
-?>
-
