@@ -1,6 +1,9 @@
+<?php 
+require_once 'conf/Config.php';
+?>
 <html>
 <head>
-	<title>Tiny Tiny RSS : Login</title>
+	<title><?php echo Config::PROGRAM_NAME; ?> : Login</title>
 	<link rel="stylesheet" type="text/css" href="lib/dijit/themes/claro/claro.css"/>
 	<link rel="stylesheet" type="text/css" href="tt-rss.css">
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png">
@@ -245,7 +248,7 @@ function bwLimitChange(elem) {
 </div>
 
 <div class='footer'>
-	<a href="http://tt-rss.org/">Tiny Tiny RSS</a>
+	<a href="http://tt-rss.org/"><?php echo Config::PROGRAM_NAME; ?></a>
 	<?php if (!defined('HIDE_VERSION')) { ?>
 		 v<?php echo VERSION ?>
 	<?php } ?>

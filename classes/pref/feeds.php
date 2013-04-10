@@ -1,4 +1,6 @@
 <?php
+require_once 'conf/Config.php';
+
 class Pref_Feeds extends Handler_Protected {
 
 	function csrf_ignore($method) {
@@ -1367,7 +1369,7 @@ class Pref_Feeds extends Handler_Protected {
 
 		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('OPML')."\">";
 
-		print "<p>" . __("Using OPML you can export and import your feeds, filters, labels and Tiny Tiny RSS settings.") . " ";
+		print "<p>" . __("Using OPML you can export and import your feeds, filters, labels and " . Config::PROGRAM_NAME . " settings.") . " ";
 
 		print __("Only main settings profile can be migrated using OPML.") . "</p>";
 
@@ -1387,7 +1389,7 @@ class Pref_Feeds extends Handler_Protected {
 		print "<hr>";
 
 		print "<p>" . __('Filename:') .
-            " <input type=\"text\" id=\"filename\" value=\"TinyTinyRSS.opml\" />&nbsp;" .
+            " <input type=\"text\" id=\"filename\" value=\"" . str_replace(' ', '', Config::PROGRAM_NAME) . " . '.opml\" />&nbsp;" .
 				__('Include settings') . "<input type=\"checkbox\" id=\"settings\" checked=\"1\"/>";
 
 		print "</p><button dojoType=\"dijit.form.Button\"
@@ -1398,7 +1400,7 @@ class Pref_Feeds extends Handler_Protected {
 
 		print "<p>".__('Your OPML can be published publicly and can be subscribed by anyone who knows the URL below.') . " ";
 
-		print __("Published OPML does not include your Tiny Tiny RSS settings, feeds that require authentication or feeds hidden from Popular feeds.") . "</p>";
+		print __("Published OPML does not include your " . Config::PROGRAM_NAME . " settings, feeds that require authentication or feeds hidden from Popular feeds.") . "</p>";
 
 		print "<button dojoType=\"dijit.form.Button\" onclick=\"return displayDlg('".__("Public OPML URL")."','pubOPMLUrl')\">".
 			__('Display published OPML URL')."</button> ";
@@ -1413,13 +1415,13 @@ class Pref_Feeds extends Handler_Protected {
 
 			print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Firefox integration')."\">";
 
-			print "<p>" . __('This Tiny Tiny RSS site can be used as a Firefox Feed Reader by clicking the link below.') . "</p>";
+			print "<p>" . __('This ' . Config::PROGRAM_NAME . ' site can be used as a Firefox Feed Reader by clicking the link below.') . "</p>";
 
 			print "<p>";
 
 			print "<button onclick='window.navigator.registerContentHandler(" .
                       "\"application/vnd.mozilla.maybe.feed\", " .
-                      "\"" . add_feed_url() . "\", " . " \"Tiny Tiny RSS\")'>" .
+                      "\"" . add_feed_url() . "\", " . " \"" . Config::PROGRAM_NAME . "\")'>" .
 							 __('Click here to register this site as a feed reader.') .
 				"</button>";
 

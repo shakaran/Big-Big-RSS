@@ -199,7 +199,7 @@
 
 			<h1>Startup failed</h1>
 
-			<p>Tiny Tiny RSS was unable to start properly. This usually means a misconfiguration or an incomplete upgrade. Please fix
+			<p><?php echo Config::PROGRAM_NAME; ?> was unable to start properly. This usually means a misconfiguration or an incomplete upgrade. Please fix
 			errors indicated by the following messages:</p>
 
 			<?php foreach ($errors as $error) { echo format_error($error); } ?>
@@ -215,7 +215,7 @@
 		<?php
 			die;
 		} else if (count($errors) > 0) {
-			echo "Tiny Tiny RSS was unable to start properly. This usually means a misconfiguration or an incomplete upgrade.\n";
+			echo Config::PROGRAM_NAME . ' was unable to start properly. This usually means a misconfiguration or an incomplete upgrade.\n';
 			echo "Please fix errors indicated by the following messages:\n\n";
 
 			foreach ($errors as $error) {

@@ -1,6 +1,8 @@
 <?php 
 class Config
 {
+	const PROGRAM_NAME          = 'Big Big RSS';
+	
 	// Operate in single user mode, disables all functionality related to
 	// multiple users and authentication. Enabling this assumes you have
 	// your tt-rss directory protected by other means (e.g. http auth).

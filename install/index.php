@@ -1,6 +1,9 @@
+<?php 
+require_once 'conf/Config.php';
+?>
 <html>
 <head>
-	<title>Tiny Tiny RSS - Installer</title>
+	<title><?php echo Config::PROGRAM_NAME; ?> - Installer</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" type="text/css" href="../utility.css">
 	<style type="text/css">
@@ -171,7 +174,7 @@
 
 <div class="floatingLogo"><img src="../images/logo_small.png"></div>
 
-<h1>Tiny Tiny RSS Installer</h1>
+<h1><?php echo Config::PROGRAM_NAME; ?> Installer</h1>
 
 <div class='content'>
 
@@ -246,10 +249,10 @@
 
 <h2>Other settings</h2>
 
-<p>This should be set to the location your Tiny Tiny RSS will be available on.</p>
+<p>This should be set to the location your <?php echo Config::PROGRAM_NAME; ?> will be available on.</p>
 
 <fieldset>
-	<label>Tiny Tiny RSS URL</label>
+	<label><?php echo Config::PROGRAM_NAME; ?> URL</label>
 	<input type="url" name="SELF_URL_PATH" placeholder="<?php echo $SELF_URL_PATH; ?>" size="60" value="<?php echo $SELF_URL_PATH ?>"/>
 </fieldset>
 

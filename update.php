@@ -52,7 +52,7 @@
 
 		<body>
 		<div class="floatingLogo"><img src="images/logo_small.png"></div>
-		<h1><?php echo __("Tiny Tiny RSS data update script.") ?></h1>
+		<h1><?php echo __(Config::PROGRAM_NAME . " data update script.") ?></h1>
 
 		<?php print_error("Please run this script from the command line. Use option \"-help\" to display command help if this error is displayed erroneously."); ?>
 

@@ -1,4 +1,6 @@
 <?php
+require_once 'conf/Config.php';
+
 	define('EXPECTED_CONFIG_VERSION', 26);
 	define('SCHEMA_VERSION', 116);
 
@@ -130,7 +132,7 @@
 	require_once 'ccache.php';
 	require_once 'labels.php';
 
-	define('SELF_USER_AGENT', 'Tiny Tiny RSS/' . VERSION . ' (http://tt-rss.org/)');
+	define('SELF_USER_AGENT', Config::PROGRAM_NAME . '/' . VERSION . ' (http://tt-rss.org/)');
 	ini_set('user_agent', SELF_USER_AGENT);
 
 	require_once 'lib/pubsubhubbub/publisher.php';
@@ -706,11 +708,11 @@
 	function initialize_user($link, $uid) {
 
 		db_query($link, "insert into ttrss_feeds (owner_uid,title,feed_url)
-			values ('$uid', 'Tiny Tiny RSS: New Releases',
+			values ('$uid', '" . Config::PROGRAM_NAME . ": New Releases',
 			'http://tt-rss.org/releases.rss')");
 
 		db_query($link, "insert into ttrss_feeds (owner_uid,title,feed_url)
-			values ('$uid', 'Tiny Tiny RSS: Forum',
+			values ('$uid', '" . Config::PROGRAM_NAME . ": Forum',
 				'http://tt-rss.org/forum/rss.php')");
 	}
 
@@ -3089,7 +3091,7 @@
 				header("Content-Type: text/html");
 				$rv['content'] .= "<html><head>
 						<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
-						<title>Tiny Tiny RSS - ".$line["title"]."</title>
+						<title>" . Config::PROGRAM_NAME . " - ".$line["title"]."</title>
 						<link rel=\"stylesheet\" type=\"text/css\" href=\"tt-rss.css\">
 					</head><body id=\"ttrssZoom\">";
 			}

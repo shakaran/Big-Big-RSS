@@ -1,4 +1,6 @@
 <?php
+require_once 'conf/Config.php';
+
 class Handler_Public extends Handler {
 
 	private function generate_syndicated_feed($owner_uid, $feed, $is_cat,
@@ -388,7 +390,7 @@ class Handler_Public extends Handler {
 		}
 
 		header('Content-Type: text/html; charset=utf-8');
-		print "<html><head><title>Tiny Tiny RSS</title>";
+		print "<html><head><title>" . Config::PROGRAM_NAME . "</title>";
 
 		print stylesheet_tag("utility.css");
 		print javascript_tag("lib/prototype.js");
@@ -421,7 +423,7 @@ class Handler_Public extends Handler {
 				?>
 
 				<table height='100%' width='100%'><tr><td colspan='2'>
-				<h1><?php echo __("Share with Tiny Tiny RSS") ?></h1>
+				<h1><?php echo __("Share with " . Config::PROGRAM_NAME) ?></h1>
 				</td></tr>
 
 				<form id='share_form' name='share_form'>
@@ -568,13 +570,13 @@ class Handler_Public extends Handler {
 			header('Content-Type: text/html; charset=utf-8');
 			print "<html>
 				<head>
-					<title>Tiny Tiny RSS</title>
+					<title>' . Config::PROGRAM_NAME . '</title>
 					<link rel=\"stylesheet\" type=\"text/css\" href=\"utility.css\">
 					<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
 				</head>
 				<body>
 				<img class=\"floatingLogo\" src=\"images/logo_small.png\"
-			  		alt=\"Tiny Tiny RSS\"/>
+			  		alt=\"' . Config::PROGRAM_NAME . '\"/>
 					<h1>".__("Subscribe to feed...")."</h1><div class='content'>";
 
 			$rc = subscribe_to_feed($this->link, $feed_url);
@@ -645,7 +647,7 @@ class Handler_Public extends Handler {
 			}
 
 			print "<form style='display: inline' method=\"GET\" action=\"$tt_uri\">
-				<input type=\"submit\" value=\"".__("Return to Tiny Tiny RSS")."\">
+				<input type=\"submit\" value=\"".__("Return to " . Config::PROGRAM_NAME)."\">
 				</form></p>";
 
 			print "</div></body></html>";
@@ -733,7 +735,7 @@ class Handler_Public extends Handler {
 		}
 
 		print "<form style='display: inline' method=\"GET\" action=\"$tt_uri\">
-			<input type=\"submit\" value=\"".__("Return to Tiny Tiny RSS")."\">
+			<input type=\"submit\" value=\"".__("Return to " . Config::PROGRAM_NAME)."\">
 			</form></p>";
 
 		print "</body></html>";
@@ -746,7 +748,7 @@ class Handler_Public extends Handler {
 
 	function forgotpass() {
 		header('Content-Type: text/html; charset=utf-8');
-		print "<html><head><title>Tiny Tiny RSS</title>";
+		print "<html><head><title>" . Config::PROGRAM_NAME . "</title>";
 
 		print stylesheet_tag("utility.css");
 		print javascript_tag("lib/prototype.js");
@@ -815,7 +817,7 @@ class Handler_Public extends Handler {
 					print "<p>"."Completed."."</p>";
 
 					print "<form method=\"GET\" action=\"index.php\">
-						<input type=\"submit\" value=\"".__("Return to Tiny Tiny RSS")."\">
+						<input type=\"submit\" value=\"".__("Return to " . Config::PROGRAM_NAME)."\">
 						</form>";
 
 				} else {
@@ -890,7 +892,7 @@ class Handler_Public extends Handler {
 
 								print_warning("One of the updates failed. Either retry the process or perform updates manually.");
 								print "<p><form method=\"GET\" action=\"index.php\">
-								<input type=\"submit\" value=\"".__("Return to Tiny Tiny RSS")."\">
+								<input type=\"submit\" value=\"".__("Return to " . Config::PROGRAM_NAME)."\">
 								</form>";
 
 								break;
@@ -901,17 +903,17 @@ class Handler_Public extends Handler {
 
 						print "</ul>";
 
-						print_notice("Your Tiny Tiny RSS database is now updated to the latest version.");
+						print_notice("Your " . Config::PROGRAM_NAME . " database is now updated to the latest version.");
 
 						print "<p><form method=\"GET\" action=\"index.php\">
-						<input type=\"submit\" value=\"".__("Return to Tiny Tiny RSS")."\">
+						<input type=\"submit\" value=\"".__("Return to " . Config::PROGRAM_NAME)."\">
 						</form>";
 
 					} else {
 						print "<h2>Your database is up to date.</h2>";
 
 						print "<p><form method=\"GET\" action=\"index.php\">
-						<input type=\"submit\" value=\"".__("Return to Tiny Tiny RSS")."\">
+						<input type=\"submit\" value=\"".__("Return to " . Config::PROGRAM_NAME)."\">
 						</form>";
 					}
 				} else {
@@ -920,7 +922,7 @@ class Handler_Public extends Handler {
 						print "<h2>Database update required</h2>";
 
 						print "<h3>";
-						printf("Your Tiny Tiny RSS database needs update to the latest version: %d to %d.",
+						printf("Your " . Config::PROGRAM_NAME . " database needs update to the latest version: %d to %d.",
 							$updater->getSchemaVersion(), SCHEMA_VERSION);
 						print "</h3>";
 
@@ -933,10 +935,10 @@ class Handler_Public extends Handler {
 
 					} else {
 
-						print "<h2>" . "Tiny Tiny RSS database is up to date." . "</h2>";
+						print "<h2>" . Config::PROGRAM_NAME . "database is up to date.</h2>";
 
 						print "<p><form method=\"GET\" action=\"index.php\">
-							<input type=\"submit\" value=\"".__("Return to Tiny Tiny RSS")."\">
+							<input type=\"submit\" value=\"".__("Return to " . Config::PROGRAM_NAME)."\">
 						</form>";
 
 					}
