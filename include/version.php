@@ -1,2 +1,2 @@
 <?php
-	define('VERSION', "1.7.8");
+	define('VERSION', '0.1');
