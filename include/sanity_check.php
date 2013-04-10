@@ -26,7 +26,7 @@
 		$errors = array();
 
 		if (!file_exists("config.php")) {
-			array_push($errors, "Configuration file not found. Looks like you forgot to copy config.php-dist to config.php and edit it.");
+			$errors[] = "Configuration file not found. Looks like you forgot to copy config.php-dist to config.php and edit it.";
 		} else {
 
 			# This code has been generated at:  Mon Apr 1 18:30:54 IDT 2013
@@ -71,46 +71,44 @@
 			);
 			
 			if (file_exists("install") && !file_exists("config.php")) {
-				array_push($errors, "Please copy config.php-dist to config.php or run the installer in install/");
+				$errors[] = "Please copy config.php-dist to config.php or run the installer in install/";
 			}
 
 			if (strpos(PLUGINS, "auth_") === FALSE) {
-				array_push($errors, "Please enable at least one authentication module via PLUGINS constant in config.php");
+				$errors[] = "Please enable at least one authentication module via PLUGINS constant in config.php";
 			}
 
 			if (function_exists('posix_getuid') && posix_getuid() == 0) {
-				array_push($errors, "Please don't run this script as root.");
+				$errors[] = "Please don't run this script as root.";
 			}
 
 			if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-				array_push($errors, "PHP version 5.3.0 or newer required.");
+				$errors[] = "PHP version 5.3.0 or newer required.";
 			}
 
 			if (CONFIG_VERSION != EXPECTED_CONFIG_VERSION) {
-				array_push($errors, "Configuration file (config.php) has incorrect version. Update it with new options from config.php-dist and set CONFIG_VERSION to the correct value.");
+				$errors[] = "Configuration file (config.php) has incorrect version. Update it with new options from config.php-dist and set CONFIG_VERSION to the correct value.";
 			}
 
 			if (!is_writable(CACHE_DIR . "/images")) {
-				array_push($errors, "Image cache is not writable (chmod -R 777 ".CACHE_DIR."/images)");
+				$errors[] = "Image cache is not writable (chmod -R 777 ".CACHE_DIR."/images)";
 			}
 
 			if (!is_writable(CACHE_DIR . "/export")) {
-				array_push($errors, "Data export cache is not writable (chmod -R 777 ".CACHE_DIR."/export)");
+				$errors[] = "Data export cache is not writable (chmod -R 777 ".CACHE_DIR."/export)";
 			}
 
 			if (!is_writable(CACHE_DIR . "/js")) {
-				array_push($errors, "Javascript cache is not writable (chmod -R 777 ".CACHE_DIR."/js)");
+				$errors[] = "Javascript cache is not writable (chmod -R 777 ".CACHE_DIR."/js)";
 			}
 
 			if (GENERATED_CONFIG_CHECK != EXPECTED_CONFIG_VERSION) {
-				array_push($errors,
-					"Configuration option checker sanity_config.php is outdated, please recreate it using ./utils/regen_config_checks.sh");
+				$errors[] = "Configuration option checker sanity_config.php is outdated, please recreate it using ./utils/regen_config_checks.sh";
 			}
 
 			foreach ($requred_defines as $d) {
 				if (!defined($d)) {
-					array_push($errors,
-						"Required configuration file parameter $d is not defined in config.php. You might need to copy it from config.php-dist.");
+					$errors[] = "Required configuration file parameter $d is not defined in config.php. You might need to copy it from config.php-dist.";
 				}
 			}
 
@@ -121,7 +119,7 @@
 					$result = db_query($link, "SELECT id FROM ttrss_users WHERE id = 1");
 
 					if (db_num_rows($result) != 1) {
-						array_push($errors, "SINGLE_USER_MODE is enabled in config.php but default admin account is not found.");
+						$errors[] = "SINGLE_USER_MODE is enabled in config.php but default admin account is not found.";
 					}
 				}
 			}
@@ -129,52 +127,51 @@
 			if (SELF_URL_PATH == "http://yourserver/tt-rss/") {
 				$urlpath = preg_replace("/\w+\.php$/", "", make_self_url_path());
 
-				array_push($errors,
-						"Please set SELF_URL_PATH to the correct value for your server (possible value: <b>$urlpath</b>)");
+				$errors[] = "Please set SELF_URL_PATH to the correct value for your server (possible value: <b>$urlpath</b>)";
 			}
 
 			if (!is_writable(ICONS_DIR)) {
-				array_push($errors, "ICONS_DIR defined in config.php is not writable (chmod -R 777 ".ICONS_DIR.").\n");
+				$errors[] = "ICONS_DIR defined in config.php is not writable (chmod -R 777 ".ICONS_DIR.").\n";
 			}
 
 			if (!is_writable(LOCK_DIRECTORY)) {
-				array_push($errors, "LOCK_DIRECTORY defined in config.php is not writable (chmod -R 777 ".LOCK_DIRECTORY.").\n");
+				$errors[] = "LOCK_DIRECTORY defined in config.php is not writable (chmod -R 777 ".LOCK_DIRECTORY.").\n";
 			}
 
 			if (ini_get("open_basedir")) {
-				array_push($errors, "PHP configuration option open_basedir is not supported. Please disable this in PHP settings file (php.ini).");
+				$errors[] = "PHP configuration option open_basedir is not supported. Please disable this in PHP settings file (php.ini).";
 			}
 
 			if (!function_exists("curl_init") && !ini_get("allow_url_fopen")) {
-				array_push($errors, "PHP configuration option allow_url_fopen is disabled, and CURL functions are not present. Either enable allow_url_fopen or install PHP extension for CURL.");
+				$errors[] = "PHP configuration option allow_url_fopen is disabled, and CURL functions are not present. Either enable allow_url_fopen or install PHP extension for CURL.";
 			}
 
 			if (!function_exists("json_encode")) {
-				array_push($errors, "PHP support for JSON is required, but was not found.");
+				$errors[] = "PHP support for JSON is required, but was not found.";
 			}
 
 			if (DB_TYPE == "mysql" && !function_exists("mysql_connect")) {
-				array_push($errors, "PHP support for MySQL is required for configured DB_TYPE in config.php.");
+				$errors[] = "PHP support for MySQL is required for configured DB_TYPE in config.php.";
 			}
 
 			if (DB_TYPE == "pgsql" && !function_exists("pg_connect")) {
-				array_push($errors, "PHP support for PostgreSQL is required for configured DB_TYPE in config.php");
+				$errors[] = "PHP support for PostgreSQL is required for configured DB_TYPE in config.php";
 			}
 
 			if (!function_exists("mb_strlen")) {
-				array_push($errors, "PHP support for mbstring functions is required but was not found.");
+				$errors[] = "PHP support for mbstring functions is required but was not found.";
 			}
 
 			if (!function_exists("hash")) {
-				array_push($errors, "PHP support for hash() function is required but was not found.");
+				$errors[] = "PHP support for hash() function is required but was not found.";
 			}
 
 			if (!function_exists("ctype_lower")) {
-				array_push($errors, "PHP support for ctype functions are required by HTMLPurifier.");
+				$errors[] = "PHP support for ctype functions are required by HTMLPurifier.";
 			}
 
 			if (!function_exists("iconv")) {
-				array_push($errors, "PHP support for iconv is required to handle multiple charsets.");
+				$errors[] = "PHP support for iconv is required to handle multiple charsets.";
 			}
 
 			/* if (ini_get("safe_mode")) {
@@ -182,11 +179,11 @@
 			} */
 
 			if ((PUBSUBHUBBUB_HUB || PUBSUBHUBBUB_ENABLED) && !function_exists("curl_init")) {
-				array_push($errors, "PHP support for CURL is required for PubSubHubbub.");
+				$errors[] = "PHP support for CURL is required for PubSubHubbub.";
 			}
 
 			if (!class_exists("DOMDocument")) {
-				array_push($errors, "PHP support for DOMDocument is required, but was not found.");
+				$errors[] = "PHP support for DOMDocument is required, but was not found.";
 			}
 		}
 
