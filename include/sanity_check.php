@@ -105,6 +105,10 @@
 			if (!is_writable(Config::CACHE_DIR . "/export")) {
 				$errors[] = "Data export cache is not writable (chmod -R 777 ".Config::CACHE_DIR."/export)";
 			}
+			
+			if (!is_writable(Config::CACHE_DIR . "/upload")) {
+				$errors[] = "Upload cache is not writable (chmod -R 777 ".Config::CACHE_DIR."/upload)";
+			}
 
 			if (!is_writable(Config::CACHE_DIR . "/js")) {
 				$errors[] = "Javascript cache is not writable (chmod -R 777 ".Config::CACHE_DIR."/js)";
