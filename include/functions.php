@@ -2939,6 +2939,13 @@ else
 		header("Pragma: no-cache"); // HTTP/1.0
 	}
 
+	function render_login_form($link) {
+		header('Cache-Control: public');
+
+		require_once "login_form.php";
+		exit;
+	}
+
 	function format_warning($msg, $id = "") {
 		global $link;
 		return "<div class=\"warning\" id=\"$id\">
