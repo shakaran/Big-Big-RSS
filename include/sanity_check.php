@@ -118,6 +118,14 @@
 				$errors[] = "Configuration option checker sanity_config.php is outdated, please recreate it using ./utils/regen_config_checks.sh";
 			}
 
+			if (strlen(FEED_CRYPT_KEY) != 24) {
+				array_push($errors, "FEED_CRYPT_KEY should be exactly 24 characters in length.");
+			}
+
+			if (strlen(FEED_CRYPT_KEY) != 0 && !function_exists("mcrypt_decrypt")) {
+				array_push($errors, "FEED_CRYPT_KEY requires mcrypt functions which are not found.");
+			}
+
 			$config_reflector = new ReflectionClass('Config');
 			$config_constants = $config_reflector->getConstants();
 			
