@@ -1628,7 +1628,7 @@ else
 			$auth_pass_encrypted = 'false';
 		}
 
-		$auth_pass = db_escape_string($this->link, $auth_pass);
+		$auth_pass = db_escape_string($link, $auth_pass);
 
 		if (db_num_rows($result) == 0) {
 			$result = db_query($link,
