@@ -2607,6 +2607,9 @@ else
 						LEFT JOIN ttrss_feeds ON (feed_id = ttrss_feeds.id)";
 				}
 
+				if ($vfeed_query_part)
+					$vfeed_query_part .= "favicon_avg_color,";
+
 				$query = "SELECT DISTINCT
 						date_entered,
 						guid,
