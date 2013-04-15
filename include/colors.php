@@ -336,5 +336,5 @@ function hsl2rgb($arr) {
 				}
 			}
 		}
-		return false;
+		return '';
 	}
