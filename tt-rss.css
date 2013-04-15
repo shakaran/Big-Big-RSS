@@ -1037,4 +1037,7 @@ div.hl.active a.title {
 
 #feedTree span.counterNode {
 	font-weight : bold;
+
+#selected_prompt {
+	margin-right : 25px;
 }
