@@ -9,7 +9,7 @@ else
 }
 
 	define('EXPECTED_CONFIG_VERSION', 26);
-	define('SCHEMA_VERSION', 117);
+	define('SCHEMA_VERSION', 118);
 
 	define('LABEL_BASE_INDEX', -1024);
 	define('PLUGIN_FEED_BASE_INDEX', -128);
@@ -3383,37 +3383,46 @@ else
 		return is_file(ICONS_DIR . "/$id.ico") && filesize(ICONS_DIR . "/$id.ico") > 0;
 	}
 
+	function init_connection_only($link) {
+	    if ($link) {
+	        if (DB_TYPE == "pgsql") {
+	            pg_query($link, "set client_encoding = 'UTF-8'");
+	            pg_set_client_encoding("UNICODE");
+	            pg_query($link, "set datestyle = 'ISO, european'");
+	            pg_query($link, "set TIME ZONE 0");
+	        } else {
+	            db_query($link, "SET time_zone = '+0:0'");
+	
+	            if (defined('MYSQL_CHARSET') && MYSQL_CHARSET) {
+	                db_query($link, "SET NAMES " . MYSQL_CHARSET);
+	            }
+	        }
+	
+	        if(file_exists('classes/pluginhost.php'))
+	        {
+	            require_once 'classes/pluginhost.php';
+	        }
+	
+	        return true;
+	    }
+	
+	    return false;
+	}
+
 	function init_connection($link) {
-		if ($link) {
-
-			if (DB_TYPE == "pgsql") {
-				pg_query($link, "set client_encoding = 'UTF-8'");
-				pg_set_client_encoding("UNICODE");
-				pg_query($link, "set datestyle = 'ISO, european'");
-				pg_query($link, "set TIME ZONE 0");
-			} else {
-				db_query($link, "SET time_zone = '+0:0'");
-
-				if (defined('MYSQL_CHARSET') && MYSQL_CHARSET) {
-					db_query($link, "SET NAMES " . MYSQL_CHARSET);
-				}
-			}
-            
-			if(file_exists('classes/pluginhost.php'))
-			{
-			    require_once 'classes/pluginhost.php';
-			}
-			
-			global $pluginhost;
-
-			$pluginhost = new PluginHost($link);
-			$pluginhost->load(PLUGINS, $pluginhost::KIND_ALL);
-
-			return true;
-		} else {
-			print "Unable to connect to database:" . db_last_error();
-			return false;
-		}
+	    if ($link) {
+	        init_connection_only($link);
+	
+	        global $pluginhost;
+	
+	        $pluginhost = new PluginHost($link);
+	        $pluginhost->load(PLUGINS, $pluginhost::KIND_ALL);
+	
+	        return true;
+	    } else {
+	        print "Unable to connect to database:" . db_last_error();
+	        return false;
+	    }
 	}
 
 	function format_tags_string($tags, $id) {
