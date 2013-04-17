@@ -23,6 +23,7 @@
 	require_once "config.php";
 	require_once "db.php";
 	require_once "db-prefs.php";
+	require_once "errorhandler.php";
 
 	if (!function_exists('pcntl_fork')) {
 		die("error: This script requires PHP compiled with PCNTL module.\n");

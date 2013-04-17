@@ -20,7 +20,8 @@
 	require_once 'core/lib/FeedUpdater.php';
 	require_once 'core/lib/Lock.php';
 	require_once 'core/lib/Stamp.php';
-	
+	require_once "errorhandler.php";
+
 	// Create a database connection.
 	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
