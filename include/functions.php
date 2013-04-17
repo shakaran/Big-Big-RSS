@@ -19,37 +19,8 @@ else
 	$fetch_last_content_type = FALSE;
 	$pluginhost              = FALSE;
 
-	function __autoload($class) 
-	{
-		$class_file = str_replace('_', '/', strtolower(basename($class)));
-
-		$file = dirname(__FILE__) . '/../classes/' . $class . '_file.php';
-		
-		if (file_exists($file)) 
-		{
-			require_once $file;
-		}
-		else
-		{
-		    $file = dirname(__FILE__) . '/../classes/' . strtolower($class) . '.php';
-		    
-		    if (file_exists($file))
-		    {
-		        require_once $file;
-		    }
-		    else 
-		    {
-		        $file = dirname(__FILE__) . '/../classes/' . $class_file . '.php';
-		        
-		        if (file_exists($file))
-		        {
-		            require_once $file;
-		        }
-		    }
-		}
-	}
-
 	mb_internal_encoding('UTF-8');
+
 	date_default_timezone_set('UTC');
 	if (defined('E_DEPRECATED')) 
 	{

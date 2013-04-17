@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 set_include_path(dirname(__FILE__) . '/include' . PATH_SEPARATOR . get_include_path());
 
 /* remove ill effects of magic quotes */
@@ -16,6 +17,7 @@ if (get_magic_quotes_gpc())
     $_REQUEST = array_map('stripslashes_deep', $_REQUEST);
 }
 
+require_once "autoload.php";
 require_once 'sessions.php';
 require_once 'functions.php';
 require_once 'sanity_check.php';
