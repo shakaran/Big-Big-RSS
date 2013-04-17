@@ -3427,6 +3427,15 @@ else
 	    }
 	}
 
+	function init_plugins($link) {
+		global $pluginhost;
+
+		$pluginhost = new PluginHost($link);
+		$pluginhost->load(PLUGINS, $pluginhost::KIND_ALL);
+
+		return true;
+	}
+
 	function format_tags_string($tags, $id) {
 
 		$tags_str = "";
