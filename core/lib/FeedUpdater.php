@@ -25,6 +25,9 @@ class FeedUpdater
 							  'help'
 							 );
 	
+	/** string $lock_filename The file name for update lock */
+	private $lock_filename = 'update.lock';
+	
 	public function __construct()
 	{
 	
@@ -120,7 +123,7 @@ class FeedUpdater
 	}
 	
 	/**
-	 * Check if it is needed display the usage.
+	 * Check if it is needed display the usage and exits.
 	 * 
 	 * Display the usage in STDIN and Web mode or if the
 	 * flag helps is enabled.
@@ -130,24 +133,58 @@ class FeedUpdater
 	 */
 	public function checkUsage()
 	{
-		if ((count($this->longopts) == 0 && !is_array($this->longopts)) || isset($this->longopts['help']))
+		if((count($this->longopts) == 0 && !is_array($this->longopts)) || isset($this->longopts['help']))
 		{
 			if(!defined('STDIN'))
 			{
 				$this->showHtmlUsage();
-				exit;
 			}
-			else // 
+			else
 			{
 				$this->showUsage();
 				
 				global $pluginhost;
 				
-				foreach ($pluginhost->get_commands() as $command => $data) 
+				foreach($pluginhost->get_commands() as $command => $data) 
 				{
-					printf(" --%-19s - %s\n", $command . ' ' . $data['arghelp'], $data['description'']);
+					printf(" --%-19s - %s\n", $command . ' ' . $data['arghelp'], $data['description']);
 				}
 			}
+			
+			exit;
 		}
+	}
+	
+	/**
+	 * Detect log option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function logOption()
+	{
+		if(isset($this->longopts['log'])) 
+		{
+			_debug('Logging to ' . $this->longopts['log']);
+			define('LOGFILE', $this->longopts['log']);
+		}
+	}
+	
+	/**
+	 * Get the lock filename.
+	 * 
+	 * The filename depends if is daemon mode running or not
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return string The lock filename
+	 */
+	public function getLockFileName()
+	{
+		if(isset($this->longopts['daemon'])) 
+		{
+			$this->lock_filename = 'update_daemon.lock';
+		} 
+		
+		return $this->lock_filename;
 	}
 }

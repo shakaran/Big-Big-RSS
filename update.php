@@ -30,16 +30,9 @@
 
 	define('QUIET', isset($options['quiet']));
 
-	if (isset($options["log"])) {
-		_debug("Logging to " . $options["log"]);
-		define('LOGFILE', $options["log"]);
-	}
+	$feed_updater->logOption();
 
-	if (!isset($options["daemon"])) {
-		$lock_filename = "update.lock";
-	} else {
-		$lock_filename = "update_daemon.lock";
-	}
+	$lock_filename = $feed_updater->getLockFileName();
 
 	if (isset($options["task"])) {
 		_debug("Using task id " . $options["task"]);
