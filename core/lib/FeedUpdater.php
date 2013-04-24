@@ -70,9 +70,10 @@ class FeedUpdater
 	 * Show program usage
 	 * 
 	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @access private
 	 * @return void
 	 */
-	public static function showUsage()
+	private static function showUsage()
 	{
 		echo Config::PROGRAM_NAME . ' data update script.' . PHP_EOL . PHP_EOL .
 		     'Options:\n' . PHP_EOL .
@@ -96,9 +97,10 @@ class FeedUpdater
 	 * Show program html usage
 	 *
 	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @access private
 	 * @return void
 	 */
-	public static function showHtmlUsage()
+	private function showHtmlUsage()
 	{
 		echo '<html>
 		<head>
@@ -115,5 +117,37 @@ class FeedUpdater
 
 		echo '</body>
 		</html>';
+	}
+	
+	/**
+	 * Check if it is needed display the usage.
+	 * 
+	 * Display the usage in STDIN and Web mode or if the
+	 * flag helps is enabled.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function checkUsage()
+	{
+		if ((count($this->longopts) == 0 && !is_array($this->longopts)) || isset($this->longopts['help']))
+		{
+			if(!defined('STDIN'))
+			{
+				$this->showHtmlUsage();
+				exit;
+			}
+			else // 
+			{
+				$this->showUsage();
+				
+				global $pluginhost;
+				
+				foreach ($pluginhost->get_commands() as $command => $data) 
+				{
+					printf(" --%-19s - %s\n", $command . ' ' . $data['arghelp'], $data['description'']);
+				}
+			}
+		}
 	}
 }

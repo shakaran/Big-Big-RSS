@@ -26,23 +26,7 @@
 	$feed_updater = new FeedUpdater();
 	$options = $feed_updater->fetchOptions()->parseOptions();
 
-	if (count($options) == 0 && !is_array($options) && !defined('STDIN')) 
-	{
-		FeedUpdater::showHtmlUsage();
-		exit;
-	}
-
-	if (count($options) == 0 || isset($options["help"]) ) 
-	{
-		FeedUpdater::showUsage();
-
-		foreach ($pluginhost->get_commands() as $command => $data) {
-			$args = $data['arghelp'];
-			printf(" --%-19s - %s\n", "$command $args", $data["description"]);
-		}
-
-		return;
-	}
+	$feed_updater->checkUsage();
 
 	define('QUIET', isset($options['quiet']));
 
