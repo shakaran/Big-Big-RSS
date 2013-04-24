@@ -23,28 +23,10 @@
 
 	init_connection($link);
 
-	$longopts = array("feeds",
-			"feedbrowser",
-			"daemon",
-			"daemon-loop",
-			"task:",
-			"cleanup-tags",
-			"quiet",
-			"log:",
-			"indexes",
-			"update-schema",
-			"convert-filters",
-			"force-update",
-			"list-plugins",
-			"help");
+	$feed_updater = new FeedUpdater();
+	$options = $feed_updater->fetchOptions()->parseOptions();
 
-	foreach ($pluginhost->get_commands() as $command => $data) {
-		array_push($longopts, $command . $data["suffix"]);
-	}
-
-	$options = getopt('', $longopts);
-
-	if (count($options) == 0 && !defined('STDIN')) 
+	if (count($options) == 0 && !is_array($options) && !defined('STDIN')) 
 	{
 		FeedUpdater::showHtmlUsage();
 		exit;

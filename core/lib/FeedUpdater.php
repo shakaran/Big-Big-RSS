@@ -9,9 +9,61 @@
  */
 class FeedUpdater
 {
+	private $longopts = array('feeds',
+							  'feedbrowser',
+							  'daemon',
+							  'daemon-loop',
+							  'task:',
+							  'cleanup-tags',
+							  'quiet',
+							  'log:',
+							  'indexes',
+							  'update-schema',
+							  'convert-filters',
+							  'force-update',
+							  'list-plugins',
+							  'help'
+							 );
+	
 	public function __construct()
 	{
 	
+	}
+	
+	/**
+	 * Fetch the options for feed updater.
+	 * 
+	 * Additionally fetch the options in plugin hooks.
+	 * 
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return FeedUpdater A FeedUpdater instance
+	 */
+	public function fetchOptions()
+	{
+		global $pluginhost;
+		
+		// Run plugin hook for get more commands from plugins
+		foreach ($pluginhost->get_commands() as $command => $data) 
+		{
+			$this->longopts[] = $command . $data['suffix'];
+		}
+		
+		return $this;
+	}
+	
+	/**
+	 * Parse the options for feed updater.
+	 *
+	 * It uses getopt default php's native implementation.
+	 * 
+	 * @todo In future use a better approach with GetOpt.PHP library
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return FeedUpdater A FeedUpdater instance
+	 */
+	public function parseOptions()
+	{
+		return getopt('', $this->longopts);
 	}
 	
 	/**
