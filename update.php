@@ -61,23 +61,24 @@
 		exit;
 	}
 
-	if (count($options) == 0 || isset($options["help"]) ) {
-		print "Tiny Tiny RSS data update script.\n\n";
-		print "Options:\n";
-		print "  --feeds              - update feeds\n";
-		print "  --feedbrowser        - update feedbrowser\n";
-		print "  --daemon             - start single-process update daemon\n";
-		print "  --task N             - create lockfile using this task id\n";
-		print "  --cleanup-tags       - perform tags table maintenance\n";
-		print "  --quiet              - don't output messages to stdout\n";
-		print "  --log FILE           - log messages to FILE\n";
-		print "  --indexes            - recreate missing schema indexes\n";
-		print "  --update-schema      - update database schema\n";
-		print "  --convert-filters    - convert type1 filters to type2\n";
-		print "  --force-update       - force update of all feeds\n";
-		print "  --list-plugins       - list all available plugins\n";
-		print "  --help               - show this help\n";
-		print "Plugin options:\n";
+	if (count($options) == 0 || isset($options["help"]) ) 
+	{
+		echo Config::PROGRAM_NAME . ' data update script.' . PHP_EOL . PHP_EOL .
+		     'Options:\n' . PHP_EOL .
+		     '  --feeds              - update feeds' . PHP_EOL .
+		     '  --feedbrowser        - update feedbrowser' . PHP_EOL .
+		     '  --daemon             - start single-process update daemon' . PHP_EOL .
+		     '  --task N             - create lockfile using this task id' . PHP_EOL .
+		     '  --cleanup-tags       - perform tags table maintenance' . PHP_EOL .
+		     '  --quiet              - don\'t output messages to stdout' . PHP_EOL .
+		     '  --log FILE           - log messages to FILE' . PHP_EOL .
+		     '  --indexes            - recreate missing schema indexes' . PHP_EOL .
+		     '  --update-schema      - update database schema' . PHP_EOL .
+		     '  --convert-filters    - convert type1 filters to type2' . PHP_EOL .
+		     '  --force-update       - force update of all feeds' . PHP_EOL .
+		     '  --list-plugins       - list all available plugins' . PHP_EOL .
+		     '  --help               - show this help' . PHP_EOL .
+		     'Plugin options:' . PHP_EOL;
 
 		foreach ($pluginhost->get_commands() as $command => $data) {
 			$args = $data['arghelp'];
