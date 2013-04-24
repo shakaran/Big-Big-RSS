@@ -39,4 +39,29 @@ class FeedUpdater
 		     '  --help               - show this help' . PHP_EOL .
 		     'Plugin options:' . PHP_EOL;
 	}
+	
+	/**
+	 * Show program html usage
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public static function showHtmlUsage()
+	{
+		echo '<html>
+		<head>
+			<title>' . Config::PROGRAM_NAME . ' data update script.</title>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			<link rel="stylesheet" type="text/css" href="utility.css">
+		</head>
+
+		<body>
+			<div class="floatingLogo"><img src="images/logo_small.png"></div>
+			<h1>' . __(Config::PROGRAM_NAME . " data update script.") . '</h1>';
+
+			print_error("Please run this script from the command line. Use option \"-help\" to display command help if this error is displayed erroneously.");
+
+		echo '</body>
+		</html>';
+	}
 }

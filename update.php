@@ -42,24 +42,11 @@
 		array_push($longopts, $command . $data["suffix"]);
 	}
 
-	$options = getopt("", $longopts);
+	$options = getopt('', $longopts);
 
-	if (count($options) == 0 && !defined('STDIN')) {
-		?> <html>
-		<head>
-		<title>Tiny Tiny RSS data update script.</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link rel="stylesheet" type="text/css" href="utility.css">
-		</head>
-
-		<body>
-		<div class="floatingLogo"><img src="images/logo_small.png"></div>
-		<h1><?php echo __(Config::PROGRAM_NAME . " data update script.") ?></h1>
-
-		<?php print_error("Please run this script from the command line. Use option \"-help\" to display command help if this error is displayed erroneously."); ?>
-
-		</body></html>
-	<?php
+	if (count($options) == 0 && !defined('STDIN')) 
+	{
+		FeedUpdater::showHtmlUsage();
 		exit;
 	}
 
