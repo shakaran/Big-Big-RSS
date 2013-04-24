@@ -41,9 +41,6 @@
 	// Directory for lockfiles, must be writable to the user you run
 	// daemon process or cronjobs under.
 
-	define('CACHE_DIR', 'cache');
-	// Local cache directory for RSS feed content.
-
 	define('ICONS_DIR', "feed-icons");
 	define('ICONS_URL', "feed-icons");
 	// Local and URL path to the directory, where feed favicons are stored.

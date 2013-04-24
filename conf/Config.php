@@ -16,6 +16,9 @@ class Config
 	
 	// Files and directories
 	
+	const CACHE_DIR             = 'cache'; // Local cache directory for RSS feed content (default: cache).
+	
+	
 	// Path to PHP executable, used for various command-line programs
 	const PHP_EXECUTABLE        = '/usr/bin/php';
 }

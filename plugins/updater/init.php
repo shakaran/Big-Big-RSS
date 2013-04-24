@@ -231,11 +231,11 @@ class Updater extends Plugin {
 				array_push($log, "Fixing permissions...");
 
 				$directories = array(
-					CACHE_DIR,
-					CACHE_DIR . "/export",
-					CACHE_DIR . "/images",
-					CACHE_DIR . "/js",
-					CACHE_DIR . "/simplepie",
+					Config::CACHE_DIR,
+					Config::CACHE_DIR . "/export",
+					Config::CACHE_DIR . "/images",
+					Config::CACHE_DIR . "/js",
+					Config::CACHE_DIR . "/simplepie",
 					ICONS_DIR,
 					LOCK_DIRECTORY);
 

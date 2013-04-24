@@ -233,7 +233,7 @@
 
 		$date_feed_processed = date('Y-m-d H:i');
 
-		$cache_filename = CACHE_DIR . "/simplepie/" . sha1($fetch_url) . ".feed";
+		$cache_filename = Config::CACHE_DIR . "/simplepie/" . sha1($fetch_url) . ".feed";
 
 		// Ignore cache if new feed or manual update.
 		$cache_age = ($no_cache || is_null($last_updated) || $last_updated == '1970-01-01 00:00:00') ?
@@ -354,7 +354,7 @@
 		if (!$rss->error()) {
 
 			// cache data for later
-			if (!$auth_pass && !$auth_login && is_writable(CACHE_DIR . "/simplepie")) {
+			if (!$auth_pass && !$auth_login && is_writable(Config::CACHE_DIR . "/simplepie")) {
 				$rss_data = serialize($rss);
 				$new_rss_hash = sha1($rss_data);
 
@@ -655,7 +655,7 @@
 					_debug("update_rss_feed: plugin data: $entry_plugin_data");
 				}
 
-				if ($cache_images && is_writable(CACHE_DIR . '/images'))
+				if ($cache_images && is_writable(Config::CACHE_DIR . '/images'))
 					cache_images($entry_content, $site_url, $debug_enabled);
 
 				$entry_content = db_escape_string($link, $entry_content, false);
@@ -1126,7 +1126,7 @@
 	}
 
 	function cache_images($html, $site_url, $debug) {
-		$cache_dir = CACHE_DIR . "/images";
+		$cache_dir = Config::CACHE_DIR . "/images";
 
 		libxml_use_internal_errors(true);
 
@@ -1144,7 +1144,7 @@
 			if ($entry->hasAttribute('src')) {
 				$src = rewrite_relative_url($site_url, $entry->getAttribute('src'));
 
-				$local_filename = CACHE_DIR . "/images/" . sha1($src) . ".png";
+				$local_filename = Config::CACHE_DIR . "/images/" . sha1($src) . ".png";
 
 				if ($debug) _debug("cache_images: downloading: $src to $local_filename");
 
@@ -1191,7 +1191,7 @@
 
 	function expire_cached_files($debug) {
 		foreach (array("simplepie", "images", "export") as $dir) {
-			$cache_dir = CACHE_DIR . "/$dir";
+			$cache_dir = Config::CACHE_DIR . "/$dir";
 
 			if ($debug) _debug("Expiring $cache_dir");
 

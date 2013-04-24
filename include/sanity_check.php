@@ -25,6 +25,8 @@
 
 		$errors = array();
 
+		require_once 'conf/Config.php';
+		
 		if (!file_exists("config.php")) {
 			$errors[] = "Configuration file not found. Looks like you forgot to copy config.php-dist to config.php and edit it.";
 		} else {
@@ -89,16 +91,16 @@
 				$errors[] = "Configuration file (config.php) has incorrect version. Update it with new options from config.php-dist and set CONFIG_VERSION to the correct value.";
 			}
 
-			if (!is_writable(CACHE_DIR . "/images")) {
-				$errors[] = "Image cache is not writable (chmod -R 777 ".CACHE_DIR."/images)";
+			if (!is_writable(Config::CACHE_DIR . "/images")) {
+				$errors[] = "Image cache is not writable (chmod -R 777 ".Config::CACHE_DIR."/images)";
 			}
 
-			if (!is_writable(CACHE_DIR . "/export")) {
-				$errors[] = "Data export cache is not writable (chmod -R 777 ".CACHE_DIR."/export)";
+			if (!is_writable(Config::CACHE_DIR . "/export")) {
+				$errors[] = "Data export cache is not writable (chmod -R 777 ".Config::CACHE_DIR."/export)";
 			}
 
-			if (!is_writable(CACHE_DIR . "/js")) {
-				$errors[] = "Javascript cache is not writable (chmod -R 777 ".CACHE_DIR."/js)";
+			if (!is_writable(Config::CACHE_DIR . "/js")) {
+				$errors[] = "Javascript cache is not writable (chmod -R 777 ".Config::CACHE_DIR."/js)";
 			}
 
 			if (GENERATED_CONFIG_CHECK != EXPECTED_CONFIG_VERSION) {

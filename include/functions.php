@@ -2684,7 +2684,7 @@ require_once 'conf/Config.php';
 				if ($entry->hasAttribute('src')) {
 					$src = rewrite_relative_url($site_url, $entry->getAttribute('src'));
 
-					$cached_filename = CACHE_DIR . '/images/' . sha1($src) . '.png';
+					$cached_filename = Config::CACHE_DIR . '/images/' . sha1($src) . '.png';
 
 					if (file_exists($cached_filename)) {
 						$src = SELF_URL_PATH . '/image.php?hash=' . sha1($src);
@@ -4136,7 +4136,7 @@ require_once 'conf/Config.php';
 
 		foreach ($files as $js) {
 			if (!isset($_GET['debug'])) {
-				$cached_file = CACHE_DIR . "/js/$js.js";
+				$cached_file = Config::CACHE_DIR . "/js/$js.js";
 
 				if (file_exists($cached_file) &&
 						is_readable($cached_file) &&
