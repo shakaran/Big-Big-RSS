@@ -1,5 +1,5 @@
 <?php 
-require_once 'conf/Config.php';
+require_once '../conf/Config.php';
 ?>
 <html>
 <head>
