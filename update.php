@@ -42,7 +42,6 @@
 	}
 
 	$lock_handle = Lock::create($lock_filename);
-	$must_exit = false;
 
 	// Try to lock a file in order to avoid concurrent update.
 	if (!$lock_handle) {
