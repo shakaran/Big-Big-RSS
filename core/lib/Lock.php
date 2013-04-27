@@ -12,8 +12,6 @@ class Lock
 	/**
 	 * Create a lock.
 	 *
-	 * Additionally fetch the options in plugin hooks.
-	 *
 	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
 	 * @param string $lock_filename The name of lock file.
 	 * @return resource A file pointer resource on success, or FALSE on error
