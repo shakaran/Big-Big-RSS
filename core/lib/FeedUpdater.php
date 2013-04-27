@@ -171,6 +171,24 @@ class FeedUpdater
 	}
 	
 	/**
+	 * Detect force update option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function forceUpdateOption()
+	{
+		if (isset($this->longopts['force-update'])) 
+		{
+			_debug('Marking all feeds as needing update...');
+		
+			db_query($link, "UPDATE ttrss_feeds 
+							 SET last_update_started = '1970-01-01',
+					             last_updated = '1970-01-01'");
+		}
+	}
+	
+	/**
 	 * Get the lock filename.
 	 * 
 	 * The filename depends if is daemon mode running or not

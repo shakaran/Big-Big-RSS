@@ -49,12 +49,7 @@
 			"Maybe another update process is already running.\n");
 	}
 
-	if (isset($options["force-update"])) {
-		_debug("marking all feeds as needing update...");
-
-		db_query($link, "UPDATE ttrss_feeds SET last_update_started = '1970-01-01',
-				last_updated = '1970-01-01'");
-	}
+	$feed_updater->forceUpdateOption();
 
 	if (isset($options["feeds"])) {
 		// Update all feeds needing a update.
