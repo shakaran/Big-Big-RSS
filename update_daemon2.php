@@ -10,7 +10,8 @@
 
 	require_once "version.php";
 	require_once 'conf/Config.php';
-
+	require_once 'core/lib/Lock.php';
+	
 	if (strpos(VERSION, ".99") !== false || getenv('DAEMON_XDEBUG')) {
 		define('DAEMON_EXTENDED_DEBUG', true);
 	}
@@ -160,7 +161,7 @@
 	}
 
 	// Try to lock a file in order to avoid concurrent update.
-	$lock_handle = make_lockfile("update_daemon.lock");
+	$lock_handle = Lock::create('update_daemon.lock');
 
 	if (!$lock_handle) {
 		die("error: Can't create lockfile. ".
@@ -231,7 +232,7 @@
 					$my_pid = posix_getpid();
 					$lock_filename = "update_daemon-$my_pid.lock";
 
-					$lock_handle = make_lockfile($lock_filename);
+					$lock_handle = Lock::create($lock_filename);
 
 					if (!$lock_handle) {
 						die("error: Can't create lockfile ($lock_filename). ".

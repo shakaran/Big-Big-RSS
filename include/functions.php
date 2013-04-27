@@ -954,19 +954,6 @@ require_once 'conf/Config.php';
 		return true; // consider the file always locked and skip the test
 	}
 
-	function make_lockfile($filename) {
-		$fp = fopen(LOCK_DIRECTORY . "/$filename", "w");
-
-		if ($fp && flock($fp, LOCK_EX | LOCK_NB)) {
-			if (function_exists('posix_getpid')) {
-				fwrite($fp, posix_getpid() . "\n");
-			}
-			return $fp;
-		} else {
-			return false;
-		}
-	}
-
 	function make_stampfile($filename) {
 		$fp = fopen(LOCK_DIRECTORY . "/$filename", "w");
 

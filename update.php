@@ -16,7 +16,9 @@
 	require_once "db.php";
 	require_once "db-prefs.php";
 	
+	/** @todo Loader (Autoloader class) */
 	require_once 'core/lib/FeedUpdater.php';
+	require_once 'core/lib/Lock.php';
 
 	// Create a database connection.
 	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -39,7 +41,7 @@
 		$lock_filename = $lock_filename . "-task_" . $options["task"];
 	}
 
-	$lock_handle = make_lockfile($lock_filename);
+	$lock_handle = Lock::create($lock_filename);
 	$must_exit = false;
 
 	// Try to lock a file in order to avoid concurrent update.
