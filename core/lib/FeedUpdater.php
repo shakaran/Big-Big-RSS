@@ -171,6 +171,26 @@ class FeedUpdater
 	}
 	
 	/**
+	 * Detect cleanup tags option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function cleanupTagsOption()
+	{
+		if(isset($this->longopts['cleanup-tags']))
+		{
+			global $link; /** FIXME */
+			
+			$limit = 50000;
+			$days  = 14;
+			
+			$number_tags_deleted = cleanup_tags($link, $days, $limit);
+			_debug($number_tags_deleted . ' tags deleted.' . PHP_EOL);
+		}
+	}
+	
+	/**
 	 * Detect force update option.
 	 *
 	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>

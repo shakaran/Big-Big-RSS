@@ -110,10 +110,7 @@
 
 	}
 
-	if (isset($options["cleanup-tags"])) {
-		$rc = cleanup_tags($link, 14, 50000);
-		_debug("$rc tags deleted.\n");
-	}
+	$feed_updater->cleanupTagsOption();
 
 	if (isset($options["indexes"])) {
 		_debug("PLEASE BACKUP YOUR DATABASE BEFORE PROCEEDING!");
