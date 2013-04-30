@@ -284,4 +284,19 @@ class FeedUpdater
 			$pluginhost->run_hooks($pluginhost::HOOK_UPDATE_TASK, 'hook_update_task', $this->longopts);
 		}
 	}
+	
+	/**
+	 * Detect feedbrowser option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function feedBrowserOption()
+	{
+		if(isset($this->longopts['feedbrowser']))
+		{
+			$count = update_feedbrowser_cache($link);
+			echo'"Finished, ' . $count . ' feeds processed.' . PHP_EOL;
+		}
+	}
 }

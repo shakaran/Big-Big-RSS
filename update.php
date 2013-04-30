@@ -46,13 +46,8 @@
 	}
 
 	$feed_updater->forceUpdateOption();
-
 	$feed_updater->feedsOption();
-
-	if (isset($options["feedbrowser"])) {
-		$count = update_feedbrowser_cache($link);
-		print "Finished, $count feeds processed.\n";
-	}
+	$feed_updater->feedBrowserOption();
 
 	if (isset($options["daemon"])) {
 		while (true) {
