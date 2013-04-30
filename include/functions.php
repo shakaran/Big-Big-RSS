@@ -954,19 +954,6 @@ require_once 'conf/Config.php';
 		return true; // consider the file always locked and skip the test
 	}
 
-	function make_stampfile($filename) {
-		$fp = fopen(LOCK_DIRECTORY . "/$filename", "w");
-
-		if (flock($fp, LOCK_EX | LOCK_NB)) {
-			fwrite($fp, time() . "\n");
-			flock($fp, LOCK_UN);
-			fclose($fp);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	function sql_random_function() {
 		if (DB_TYPE == "mysql") {
 			return "RAND()";

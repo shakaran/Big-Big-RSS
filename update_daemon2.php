@@ -11,6 +11,7 @@
 	require_once "version.php";
 	require_once 'conf/Config.php';
 	require_once 'core/lib/Lock.php';
+	require_once 'core/lib/Stamp.php';
 	
 	if (strpos(VERSION, ".99") !== false || getenv('DAEMON_XDEBUG')) {
 		define('DAEMON_EXTENDED_DEBUG', true);
@@ -250,8 +251,8 @@
 
 					// We disable stamp file, since it is of no use in a multiprocess update.
 					// not really, tho for the time being -fox
-					if (!make_stampfile('update_daemon.stamp')) {
-						_debug("warning: unable to create stampfile\n");
+					if (!Stamp::create('update_daemon.stamp')) {
+						_debug('Warning: unable to create stampfile' . PHP_EOL);
 					}
 
 					// Call to the feed batch update function

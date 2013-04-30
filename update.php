@@ -19,7 +19,8 @@
 	/** @todo Loader (Autoloader class) */
 	require_once 'core/lib/FeedUpdater.php';
 	require_once 'core/lib/Lock.php';
-
+	require_once 'core/lib/Stamp.php';
+	
 	// Create a database connection.
 	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -85,8 +86,9 @@
 	}
 
 	if (isset($options["daemon-loop"])) {
-		if (!make_stampfile('update_daemon.stamp')) {
-			_debug("warning: unable to create stampfile\n");
+		if (!Stamp::create('update_daemon.stamp')) 
+		{
+			_debug('Warning: unable to create stampfile' . PHP_EOL);
 		}
 
 		// Call to the feed batch update function
