@@ -37,11 +37,6 @@
 
 	$lock_filename = $feed_updater->getLockFileName();
 
-	if (isset($options["task"])) {
-		_debug("Using task id " . $options["task"]);
-		$lock_filename = $lock_filename . "-task_" . $options["task"];
-	}
-
 	$lock_handle = Lock::create($lock_filename);
 
 	// Try to lock a file in order to avoid concurrent update.

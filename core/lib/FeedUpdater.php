@@ -191,6 +191,23 @@ class FeedUpdater
 	}
 	
 	/**
+	 * Detect task option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @access private
+	 * @return void
+	 */
+	private function taskOption()
+	{
+		if (isset($this->longopts['task']))
+		{
+			_debug('Using task id ' . $this->longopts['task']);
+	
+			$this->lock_filename = $this->lock_filename . '-task_' . $this->longopts['task'];
+		}
+	}
+	
+	/**
 	 * Detect force update option.
 	 *
 	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
@@ -222,6 +239,8 @@ class FeedUpdater
 		{
 			$this->lock_filename = 'update_daemon.lock';
 		} 
+		
+		$this->taskOption();
 		
 		return $this->lock_filename;
 	}
