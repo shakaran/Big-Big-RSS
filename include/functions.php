@@ -1,7 +1,6 @@
 <?php
-require_once 'conf/Config.php';
+require_once '../conf/Config.php';
 
-	define('EXPECTED_CONFIG_VERSION', 26);
 	define('SCHEMA_VERSION', 116);
 
 	define('LABEL_BASE_INDEX', -1024);

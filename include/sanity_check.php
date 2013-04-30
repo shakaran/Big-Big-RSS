@@ -25,7 +25,7 @@
 
 		$errors = array();
 
-		require_once 'conf/Config.php';
+		require_once '../conf/Config.php';
 		
 		if (!file_exists("config.php")) {
 			$errors[] = "Configuration file not found. Looks like you forgot to copy config.php-dist to config.php and edit it.";
@@ -87,7 +87,7 @@
 				$errors[] = "PHP version 5.3.0 or newer required.";
 			}
 
-			if (CONFIG_VERSION != EXPECTED_CONFIG_VERSION) {
+			if (CONFIG_VERSION != Config::EXPECTED_CONFIG_VERSION) {
 				$errors[] = "Configuration file (config.php) has incorrect version. Update it with new options from config.php-dist and set CONFIG_VERSION to the correct value.";
 			}
 
@@ -103,7 +103,7 @@
 				$errors[] = "Javascript cache is not writable (chmod -R 777 ".Config::CACHE_DIR."/js)";
 			}
 
-			if (GENERATED_CONFIG_CHECK != EXPECTED_CONFIG_VERSION) {
+			if (GENERATED_CONFIG_CHECK != Config::EXPECTED_CONFIG_VERSION) {
 				$errors[] = "Configuration option checker sanity_config.php is outdated, please recreate it using ./utils/regen_config_checks.sh";
 			}
 

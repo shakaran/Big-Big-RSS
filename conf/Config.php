@@ -2,6 +2,8 @@
 class Config
 {
 	const PROGRAM_NAME          = 'Big Big RSS';
+
+	const EXPECTED_CONFIG_VERSION = 26;
 	
 	// Operate in single user mode, disables all functionality related to
 	// multiple users and authentication. Enabling this assumes you have
