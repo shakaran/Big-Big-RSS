@@ -51,61 +51,7 @@
 	$feed_updater->daemonOption();
 	$feed_updater->daemonLoopOption();
 	$feed_updater->cleanupTagsOption();
-
-	if (isset($options["indexes"])) {
-		_debug("PLEASE BACKUP YOUR DATABASE BEFORE PROCEEDING!");
-		_debug("Type 'yes' to continue.");
-
-		if (read_stdin() != 'yes')
-			exit;
-
-		_debug("clearing existing indexes...");
-
-		if (DB_TYPE == "pgsql") {
-			$result = db_query($link, "SELECT relname FROM
-				pg_catalog.pg_class WHERE relname LIKE 'ttrss_%'
-					AND relname NOT LIKE '%_pkey'
-				AND relkind = 'i'");
-		} else {
-			$result = db_query($link, "SELECT index_name,table_name FROM
-				information_schema.statistics WHERE index_name LIKE 'ttrss_%'");
-		}
-
-		while ($line = db_fetch_assoc($result)) {
-			if (DB_TYPE == "pgsql") {
-				$statement = "DROP INDEX " . $line["relname"];
-				_debug($statement);
-			} else {
-				$statement = "ALTER TABLE ".
-					$line['table_name']." DROP INDEX ".$line['index_name'];
-				_debug($statement);
-			}
-			db_query($link, $statement, false);
-		}
-
-		_debug("reading indexes from schema for: " . DB_TYPE);
-
-		$fp = fopen("schema/ttrss_schema_" . DB_TYPE . ".sql", "r");
-		if ($fp) {
-			while ($line = fgets($fp)) {
-				$matches = array();
-
-				if (preg_match("/^create index ([^ ]+) on ([^ ]+)$/i", $line, $matches)) {
-					$index = $matches[1];
-					$table = $matches[2];
-
-					$statement = "CREATE INDEX $index ON $table";
-
-					_debug($statement);
-					db_query($link, $statement);
-				}
-			}
-			fclose($fp);
-		} else {
-			_debug("unable to open schema file.");
-		}
-		_debug("all done.");
-	}
+	$feed_updater->indexesOption();
 
 	if (isset($options["convert-filters"])) {
 		_debug("WARNING: this will remove all existing type2 filters.");
