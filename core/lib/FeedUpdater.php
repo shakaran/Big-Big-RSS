@@ -272,17 +272,28 @@ class FeedUpdater
 			// Update all feeds needing a update.
 			update_daemon_common($link);
 		
-			// Update feedbrowser
-			$count = update_feedbrowser_cache($link);
-			_debug('Feedbrowser updated, ' . $count . ' feeds processed.');
-		
-			// Purge orphans and cleanup tags
-			purge_orphans($link, TRUE);
-		
-			$this->cleanupTagsDefault();
-
-			$pluginhost->run_hooks($pluginhost::HOOK_UPDATE_TASK, 'hook_update_task', $this->longopts);
+			$this->feedsDefault();
 		}
+	}
+	
+	/**
+	 * Update all feeds needing a update.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	private function feedsDefault()
+	{
+		global $pluginhost, $link; /** FIXME */
+
+		$this->feedBrowserDefault();
+	
+		// Purge orphans and cleanup tags
+		purge_orphans($link, TRUE);
+	
+		$this->cleanupTagsDefault();
+	
+		$pluginhost->run_hooks($pluginhost::HOOK_UPDATE_TASK, 'hook_update_task', $this->longopts);
 	}
 	
 	/**
@@ -295,9 +306,22 @@ class FeedUpdater
 	{
 		if(isset($this->longopts['feedbrowser']))
 		{
-			$count = update_feedbrowser_cache($link);
-			echo'"Finished, ' . $count . ' feeds processed.' . PHP_EOL;
+			$this->feedBrowserDefault();
 		}
+	}
+	
+	/**
+	 * Update feedbrowser cache.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	private function feedBrowserDefault()
+	{
+		global $link;
+		
+		$count = update_feedbrowser_cache($link);
+		echo'"Finished, ' . $count . ' feeds processed.' . PHP_EOL;
 	}
 	
 	/**
@@ -335,6 +359,37 @@ class FeedUpdater
 				passthru(Config::PHP_EXECUTABLE . ' ' . $argv[0] . ' --daemon-loop ' . $quiet);
 				_debug('Sleeping for ' . Config::DAEMON_SLEEP_INTERVAL . ' seconds...');
 				sleep(Config::DAEMON_SLEEP_INTERVAL);
+			}
+		}
+	}
+	
+	/**
+	 * Detect daemon loop option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function daemonLoopOption()
+	{
+		global $link;
+		
+		if(isset($this->longopts['daemon-loop']))
+		{
+			if (!Stamp::create('update_daemon.stamp'))
+			{
+				_debug('Warning: unable to create stampfile' . PHP_EOL);
+			}
+			
+			// Call to the feed batch update function
+			// or regenerate feedbrowser cache
+			
+			if (rand(0,100) > 30)  // 30% ?? @todo this seems weird
+			{
+				update_daemon_common($link);
+			} 
+			else 
+			{
+				$this->feedsDefault();
 			}
 		}
 	}

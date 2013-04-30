@@ -49,34 +49,7 @@
 	$feed_updater->feedsOption();
 	$feed_updater->feedBrowserOption();
 	$feed_updater->daemonOption();
-
-	if (isset($options["daemon-loop"])) {
-		if (!Stamp::create('update_daemon.stamp')) 
-		{
-			_debug('Warning: unable to create stampfile' . PHP_EOL);
-		}
-
-		// Call to the feed batch update function
-		// or regenerate feedbrowser cache
-
-		if (rand(0,100) > 30) {
-			update_daemon_common($link);
-		} else {
-			$count = update_feedbrowser_cache($link);
-			_debug("Feedbrowser updated, $count feeds processed.");
-
-			purge_orphans($link, true);
-
-			$rc = cleanup_tags($link, 14, 50000);
-
-			_debug("Cleaned $rc cached tags.");
-
-			global $pluginhost;
-			$pluginhost->run_hooks($pluginhost::HOOK_UPDATE_TASK, "hook_update_task", $op);
-		}
-
-	}
-
+	$feed_updater->daemonLoopOption();
 	$feed_updater->cleanupTagsOption();
 
 	if (isset($options["indexes"])) {
