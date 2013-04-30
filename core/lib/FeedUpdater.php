@@ -180,14 +180,26 @@ class FeedUpdater
 	{
 		if(isset($this->longopts['cleanup-tags']))
 		{
-			global $link; /** FIXME */
-			
-			$limit = 50000;
-			$days  = 14;
-			
-			$number_tags_deleted = cleanup_tags($link, $days, $limit);
-			_debug($number_tags_deleted . ' tags deleted.' . PHP_EOL);
+			$this->cleanupTagsDefault();
 		}
+	}
+	
+	/**
+	 * Clean the remaining tags cached.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @access private
+	 * @return void
+	 */
+	private function cleanupTagsDefault()
+	{
+		global $link; /** FIXME */
+			
+		$limit = 50000;
+		$days  = 14;
+			
+		$number_tags_deleted = cleanup_tags($link, $days, $limit);
+		_debug($number_tags_deleted . ' tags deleted.' . PHP_EOL);
 	}
 	
 	/**
@@ -243,5 +255,33 @@ class FeedUpdater
 		$this->taskOption();
 		
 		return $this->lock_filename;
+	}
+	
+	/**
+	 * Detect feeds option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function feedsOption()
+	{
+		global $pluginhost, $link; /** FIXME */
+		
+		if(isset($this->longopts['feeds']))
+		{
+			// Update all feeds needing a update.
+			update_daemon_common($link);
+		
+			// Update feedbrowser
+			$count = update_feedbrowser_cache($link);
+			_debug('Feedbrowser updated, ' . $count . ' feeds processed.');
+		
+			// Purge orphans and cleanup tags
+			purge_orphans($link, TRUE);
+		
+			$this->cleanupTagsDefault();
+
+			$pluginhost->run_hooks($pluginhost::HOOK_UPDATE_TASK, 'hook_update_task', $this->longopts);
+		}
 	}
 }
