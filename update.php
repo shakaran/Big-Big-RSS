@@ -48,16 +48,7 @@
 	$feed_updater->forceUpdateOption();
 	$feed_updater->feedsOption();
 	$feed_updater->feedBrowserOption();
-
-	if (isset($options["daemon"])) {
-		while (true) {
-			$quiet = (isset($options["quiet"])) ? "--quiet" : "";
-
-			passthru(Config::PHP_EXECUTABLE . " " . $argv[0] ." --daemon-loop $quiet");
-			_debug("Sleeping for " . Config::DAEMON_SLEEP_INTERVAL . " seconds...");
-			sleep(Config::DAEMON_SLEEP_INTERVAL);
-		}
-	}
+	$feed_updater->daemonOption();
 
 	if (isset($options["daemon-loop"])) {
 		if (!Stamp::create('update_daemon.stamp')) 

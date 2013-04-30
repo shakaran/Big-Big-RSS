@@ -299,4 +299,43 @@ class FeedUpdater
 			echo'"Finished, ' . $count . ' feeds processed.' . PHP_EOL;
 		}
 	}
+	
+	/**
+	 * Detect daemon option.
+	 *
+	 * @author Ángel Guzmán Maeso <shakaran@gmail.com>
+	 * @return void
+	 */
+	public function daemonOption()
+	{
+		if(isset($this->longopts['daemon']))
+		{
+			/** @todo Improve this daemon implementation:
+			 When a daemon program is started, it fires up a 
+			 second child process, detaches it, and then 
+			 the parent process dies. For easy up, it uses
+			 a sleep after passtru and it puts a loop 
+			 around code to run indefinitely.
+			 
+			 Use: http://www.php.net/manual/en/book.pcntl.php
+			 OR
+			 http://pear.php.net/package/System-Daemon
+			 
+			 pear install -f System_Daemon
+			 
+			 require_once "System/Daemon.php";                 // Include the Class
+
+			 System_Daemon::setOption("appName", "mydaemon");  // Minimum configuration
+			 System_Daemon::start();                           // Spawn Deamon!
+			 */
+			while (TRUE) 
+			{
+				$quiet = (isset($this->longopts['quiet'])) ? '--quiet' : '';
+	
+				passthru(Config::PHP_EXECUTABLE . ' ' . $argv[0] . ' --daemon-loop ' . $quiet);
+				_debug('Sleeping for ' . Config::DAEMON_SLEEP_INTERVAL . ' seconds...');
+				sleep(Config::DAEMON_SLEEP_INTERVAL);
+			}
+		}
+	}
 }
