@@ -652,8 +652,11 @@ class Handler_Public extends Handler {
 
 			print "</div></body></html>";
 
-		} else {
-			render_login_form($this->link);
+		} 
+		else 
+		{
+			require_once "login_form.php";
+			exit;
 		}
 	}
 
@@ -840,9 +843,10 @@ class Handler_Public extends Handler {
 	}
 
 	function dbupdate() {
-		if (!SINGLE_USER_MODE && $_SESSION["access_level"] < 10) {
+		if (!SINGLE_USER_MODE && $_SESSION["access_level"] < 10) 
+		{
 			$_SESSION["login_error_msg"] = __("Your access level is insufficient to run this script.");
-			render_login_form($link);
+			require_once "login_form.php";
 			exit;
 		}
 

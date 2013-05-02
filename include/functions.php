@@ -6,26 +6,31 @@ require_once '../conf/Config.php';
 	define('LABEL_BASE_INDEX', -1024);
 	define('PLUGIN_FEED_BASE_INDEX', -128);
 
-	$fetch_last_error = false;
-	$fetch_last_error_code = false;
-	$pluginhost = false;
+	$fetch_last_error      = FALSE;
+	$fetch_last_error_code = FALSE;
+	$pluginhost            = FALSE;
 
-	function __autoload($class) {
-		$class_file = str_replace("_", "/", strtolower(basename($class)));
+	function __autoload($class) 
+	{
+		$class_file = str_replace('_', '/', strtolower(basename($class)));
 
-		$file = dirname(__FILE__)."/../classes/$class_file.php";
+		$file = dirname(__FILE__) . '/../classes/' . $class . '_file.php';
 
-		if (file_exists($file)) {
-			require $file;
+		if (file_exists($file)) 
+		{
+			require_once $file;
 		}
 
 	}
 
-	mb_internal_encoding("UTF-8");
+	mb_internal_encoding('UTF-8');
 	date_default_timezone_set('UTC');
-	if (defined('E_DEPRECATED')) {
+	if (defined('E_DEPRECATED')) 
+	{
 		error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-	} else {
+	} 
+	else 
+	{
 		error_reporting(E_ALL & ~E_NOTICE);
 	}
 
@@ -762,7 +767,7 @@ require_once '../conf/Config.php';
 					@session_destroy();
 					setcookie(session_name(), '', time()-42000, '/');
 
-					render_login_form($link);
+					require_once 'login_form.php';
 					exit;
 				}
 
@@ -2886,11 +2891,6 @@ require_once '../conf/Config.php';
 		if (!$tag) return false;
 
 		return true;
-	}
-
-	function render_login_form($link) {
-		require_once "login_form.php";
-		exit;
 	}
 
 	// from http://developer.apple.com/internet/safari/faq.html
