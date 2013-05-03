@@ -321,13 +321,16 @@ require_once '../conf/Config.php';
 			<p>Before you can start using tt-rss, database needs to be initialized. Click on the button below to do that now.</p>
 
 			<?php
-				$result = db_query($link, "SELECT true FROM ttrss_feeds", $DB_TYPE, false);
+				$result = Feed::existLegacyTable($DB_TYPE);
 
-				if ($result) {
+				if ($result) 
+				{
 					print_error("Existing tt-rss tables will be removed from the database. If you would like to keep your data, skip database initialization.");
-					$need_confirm = true;
-				} else {
-					$need_confirm = false;
+					$need_confirm = TRUE;
+				} 
+				else 
+				{
+					$need_confirm = FALSE;
 				}
 			?>
 
