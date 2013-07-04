@@ -1,5 +1,6 @@
 <?php 
 require_once '../conf/Config.php';
+require_once '../core/lib/Feed.php';
 ?>
 <html>
 <head>
