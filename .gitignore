@@ -12,3 +12,4 @@ lib/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer/*/*ser
 web.config
 .settings
 .buildpath
+.project
