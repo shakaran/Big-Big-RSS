@@ -23,12 +23,29 @@ else
 		$class_file = str_replace('_', '/', strtolower(basename($class)));
 
 		$file = dirname(__FILE__) . '/../classes/' . $class . '_file.php';
-
+		
 		if (file_exists($file)) 
 		{
 			require_once $file;
 		}
-
+		else
+		{
+		    $file = dirname(__FILE__) . '/../classes/' . strtolower($class) . '.php';
+		    
+		    if (file_exists($file))
+		    {
+		        require_once $file;
+		    }
+		    else 
+		    {
+		        $file = dirname(__FILE__) . '/../classes/' . $class_file . '.php';
+		        
+		        if (file_exists($file))
+		        {
+		            require_once $file;
+		        }
+		    }
+		}
 	}
 
 	mb_internal_encoding('UTF-8');
@@ -3356,7 +3373,12 @@ else
 					db_query($link, "SET NAMES " . MYSQL_CHARSET);
 				}
 			}
-
+            
+			if(file_exists('classes/pluginhost.php'))
+			{
+			    require_once 'classes/pluginhost.php';
+			}
+			
 			global $pluginhost;
 
 			$pluginhost = new PluginHost($link);
