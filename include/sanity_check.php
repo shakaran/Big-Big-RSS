@@ -25,7 +25,14 @@
 
 		$errors = array();
 
-		require_once '../conf/Config.php';
+        if(file_exists('../conf/Config.php'))
+        {
+            require_once '../conf/Config.php';
+        }
+        else 
+        {
+            require_once 'conf/Config.php';
+        }
 		
 		if (!file_exists("config.php")) {
 			$errors[] = "Configuration file not found. Looks like you forgot to copy config.php-dist to config.php and edit it.";

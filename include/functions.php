@@ -1,5 +1,13 @@
 <?php
-require_once '../conf/Config.php';
+if(file_exists('../conf/Config.php'))
+{
+    require_once '../conf/Config.php';
+}
+else 
+{
+    require_once 'conf/Config.php';
+}
+
 
 	define('SCHEMA_VERSION', 116);
 
