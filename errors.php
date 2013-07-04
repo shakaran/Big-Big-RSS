@@ -46,6 +46,6 @@ if ($_REQUEST['mode'] == 'js')
 		$error = preg_replace("/\n/", '', $error);
 		$error = preg_replace("/\"/", "\\\"", $error);
 
-		echo 'ERRORS[$id] = "' . $error . '";'' . PHP_EOL;
+		echo 'ERRORS[$id] = "' . $error . '";' . PHP_EOL;
 	}
 }
