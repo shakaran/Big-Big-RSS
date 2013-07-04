@@ -40,7 +40,7 @@
 
 			# This code has been generated at:  Mon Apr 1 18:30:54 IDT 2013
 			define('GENERATED_CONFIG_CHECK', 26);
-			$requred_defines = array( 'DB_TYPE',
+			$required_defines = array( 'DB_TYPE',
 					'DB_HOST',
 					'DB_USER',
 					'DB_NAME',
@@ -114,19 +114,30 @@
 				$errors[] = "Configuration option checker sanity_config.php is outdated, please recreate it using ./utils/regen_config_checks.sh";
 			}
 
-			foreach ($requred_defines as $d) {
-				if (!defined($d)) {
-					$errors[] = "Required configuration file parameter $d is not defined in config.php. You might need to copy it from config.php-dist.";
+			$config_reflector = new ReflectionClass('Config');
+			$config_constants = $config_reflector->getConstants();
+			
+			foreach ($required_defines as $required_define) 
+			{
+				if (!in_array($required_define, array_keys($config_constants)))
+				{
+    				if(!defined($required_define)) 
+    				{
+    					$errors[] = 'Required configuration file parameter ' . $required_define . ' is not defined in config.php or conf/Config.php. You might need to copy it from config.php-dist.';
+    				}
 				}
 			}
 
-			if (SINGLE_USER_MODE) {
+			if (Config::SINGLE_USER_MODE) 
+			{
 				$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-				if ($link) {
+				if ($link) 
+				{
 					$result = db_query($link, "SELECT id FROM ttrss_users WHERE id = 1");
 
-					if (db_num_rows($result) != 1) {
+					if (db_num_rows($result) != 1) 
+					{
 						$errors[] = "SINGLE_USER_MODE is enabled in config.php but default admin account is not found.";
 					}
 				}
