@@ -164,6 +164,23 @@ require_once '../core/lib/Feed.php';
 			return $result;
 		}
 	}
+	
+	function db_num_rows($result) 
+	{
+	    switch(DB_TYPE) {
+	    	case "pgsql":
+	    	    return pg_num_rows($result);
+	    	    break;
+	    	case "mysql":
+	    	    return mysql_num_rows($result);
+	    	    break;
+	    	case "mysqli":
+	    	    return $result->num_rows;
+	    	    break;
+	    	case "pdo": // @todo
+	    	    break;
+	    }
+	}
 
 	function make_self_url_path() {
 		$url_path = ($_SERVER['HTTPS'] != "on" ? 'http://' :  'https://') . $_SERVER["HTTP_HOST"] . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
