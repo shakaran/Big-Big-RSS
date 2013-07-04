@@ -13,3 +13,4 @@ web.config
 .settings
 .buildpath
 .project
+.externalToolBuilders
