@@ -442,7 +442,7 @@ function catchupFeed(feed, is_cat, mode) {
 			onComplete: function(transport) {
 					handle_rpc_json(transport);
 
-					var show_next_feed = getInitParam("on_catchup_show_next_feed") == "1";
+					var show_next_feed = (feed > -3) && getInitParam("on_catchup_show_next_feed") == "1";
 
 					if (show_next_feed) {
 						var nuf = getNextUnreadFeed(feed, is_cat);
