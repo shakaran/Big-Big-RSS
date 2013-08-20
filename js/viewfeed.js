@@ -1688,7 +1688,10 @@ function cdmClicked(event, id) {
 
 			toggleUnread(id, 0, false);
 
-			openArticleInNewWindow(id);
+			if ((event.target || event.srcElement).tagName.toUpperCase() === 'A')
+				return true;	//Use native click on links to allow control-click to e.g. open in a background tab
+			else
+				openArticleInNewWindow(id);
 		}
 
 		var unread_in_buffer = $$("#headlines-frame > div[id*=RROW][class*=Unread]").length
