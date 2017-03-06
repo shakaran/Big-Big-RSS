@@ -1,6 +1,8 @@
 Big Big RSS
 =============
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 This is a personal fork based in Tiny Tiny RSS code by Andrew Dolgov ([@gothfox](https://github.com/gothfox)). 
 
 Use under your own risk. This fork could be very unstable.
